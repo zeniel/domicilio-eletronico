@@ -317,7 +317,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Advogado"
+                "$ref": "#/components/schemas/RegistroAdvogado"
               }
             }
           }
@@ -339,8 +339,23 @@
         "summary": "Realizar cadastro como advogado",
         "operationId": "post-usuarios-usuarioId-empresa-privada",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistroProcurador"
+              }
+            }
           }
         }
       }
@@ -360,11 +375,26 @@
         "summary": "Realizar cadastro como defensor",
         "operationId": "post-usuarios-usuarioId-empresa-privada",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
-        "description": ""
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistroDefensorPublico"
+              }
+            }
+          }
+        }
       }
     },
     "/usuarios/{login}/promotores": {
@@ -382,8 +412,23 @@
         "summary": "Realizar cadastro como promotores",
         "operationId": "post-usuarios-usuarioId-promotores",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistroPromotor"
+              }
+            }
           }
         }
       }
@@ -777,6 +822,12 @@
                 "codigo-sgt"
               ]
             }
+          },
+          "socios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaFisica"
+            }
           }
         },
         "required": [
@@ -890,6 +941,93 @@
         "required": [
           "oab"
         ]
+      },
+      "RegistroProcurador": {
+        "title": "Procurador",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "matricula": {
+            "type": "string"
+          },
+          "procuradoria": {
+            "type": "object",
+            "required": [
+              "cnpj"
+            ],
+            "properties": {
+              "cnpj": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "matricula",
+          "procuradoria"
+        ]
+      },
+      "RegistroPromotor": {
+        "title": "Promotor",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "matricula": {
+            "type": "string"
+          },
+          "promotoria": {
+            "type": "object",
+            "required": [
+              "cnpj"
+            ],
+            "properties": {
+              "cnpj": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "matricula",
+          "promotoria"
+        ]
+      },
+      "RegistroDefensorPublico": {
+        "title": "Defensor publico",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "matricula": {
+            "type": "string"
+          },
+          "defensoria-publica": {
+            "type": "object",
+            "required": [
+              "cnpj"
+            ],
+            "properties": {
+              "cnpj": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "matricula",
+          "defensoria-publica"
+        ]
+      },
+      "PessoaFisica": {
+        "title": "Pessoa Fisica",
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          }
+        }
       }
     },
     "responses": {}
