@@ -10,135 +10,9 @@
     }
   ],
   "paths": {
-    "/users/{userId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "integer"
-          },
-          "name": "userId",
-          "in": "path",
-          "required": true,
-          "description": "Id of an existing user."
-        }
-      ],
-      "get": {
-        "summary": "Get User Info by User ID",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "User Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "examples": {
-                  "Get User Alice Smith": {
-                    "value": {
-                      "id": 142,
-                      "firstName": "Alice",
-                      "lastName": "Smith",
-                      "email": "alice.smith@gmail.com",
-                      "dateOfBirth": "1997-10-31",
-                      "emailVerified": true,
-                      "signUpDate": "2019-08-24"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User Not Found"
-          }
-        },
-        "operationId": "get-users-userId",
-        "description": "Retrieve the information of the user with the matching user ID."
-      },
-      "patch": {
-        "summary": "Update User Information",
-        "operationId": "patch-users-userId",
-        "responses": {
-          "200": {
-            "description": "User Updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "examples": {
-                  "Updated User Rebecca Baker": {
-                    "value": {
-                      "id": 13,
-                      "firstName": "Rebecca",
-                      "lastName": "Baker",
-                      "email": "rebecca@gmail.com",
-                      "dateOfBirth": "1985-10-02",
-                      "emailVerified": false,
-                      "createDate": "2019-08-24"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User Not Found"
-          },
-          "409": {
-            "description": "Email Already Taken"
-          }
-        },
-        "description": "Update the information of an existing user.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "firstName": {
-                    "type": "string"
-                  },
-                  "lastName": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string",
-                    "description": "If a new email is given, the user's email verified property will be set to false."
-                  },
-                  "dateOfBirth": {
-                    "type": "string"
-                  }
-                }
-              },
-              "examples": {
-                "Update First Name": {
-                  "value": {
-                    "firstName": "Rebecca"
-                  }
-                },
-                "Update Email": {
-                  "value": {
-                    "email": "rebecca@gmail.com"
-                  }
-                },
-                "Update Last Name & Date of Birth": {
-                  "value": {
-                    "lastName": "Baker",
-                    "dateOfBirth": "1985-10-02"
-                  }
-                }
-              }
-            }
-          },
-          "description": "Patch user properties to update."
-        }
-      }
-    },
-    "/user": {
+    "/usuarios/{usuarioId}/acessos": {
       "post": {
-        "summary": "Create New User",
+        "summary": "Registrar o acesso ao sistema",
         "operationId": "post-user",
         "responses": {
           "200": {
@@ -175,28 +49,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "firstName": {
-                    "type": "string"
-                  },
-                  "lastName": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "dateOfBirth": {
-                    "type": "string",
-                    "format": "date"
-                  }
-                },
-                "required": [
-                  "firstName",
-                  "lastName",
-                  "email",
-                  "dateOfBirth"
-                ]
+                "type": "object"
               },
               "examples": {
                 "Create User Bob Fellow": {
@@ -208,11 +61,258 @@
                   }
                 }
               }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
             }
           },
-          "description": "Post the necessary fields for the API to create a new user."
+          "description": "Registrar o acesso do usuário ao sistema"
         },
         "description": "Create a new user."
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/usuarios/{usuarioId}/empresas-privadas": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como empresa privada",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/entes-autoridades": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como ente autoridade",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/procuradorias": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como procuradoria",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/promotorias": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como procuradoria",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/defensorias": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como procuradoria",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/bancas-de-advogados": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como banca de advogados",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/cidadoes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como cidadão",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/advogados": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como advogado",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/procuradores": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como advogado",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/defensores": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como defensor",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}/promotores": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "usuarioId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como promotores",
+        "operationId": "post-usuarios-usuarioId-promotores",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },
