@@ -33,8 +33,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {}
+                "$ref": "#/components/schemas/EmpresaPrivada"
               }
             },
             "application/xml": {
@@ -295,13 +294,101 @@
         "title": "EmpresaPrivada",
         "type": "object",
         "properties": {
+          "nome-fantasia": {
+            "type": "string"
+          },
           "razao-social": {
             "type": "string"
           },
           "ramo-atividade": {
             "type": "string"
           },
+          "CNPJ": {
+            "type": "string"
+          },
+          "data-abertura": {
+            "type": "string"
+          },
+          "responsavel": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              }
+            }
+          },
+          "registro-junta-comrecial": {
+            "type": [
+              "string",
+              "object"
+            ],
+            "properties": {
+              "uf": {
+                "type": "string"
+              },
+              "numero": {
+                "type": "string"
+              }
+            }
+          },
+          "contato": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeioContato"
+            }
+          },
+          "enderecos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Endereco"
+            }
+          }
+        }
+      },
+      "Endereco": {
+        "title": "Endereco",
+        "type": "object",
+        "properties": {
+          "cep": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "cidade": {
+            "type": "string"
+          },
+          "bairro": {
+            "type": "string"
+          },
+          "logradouro": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "complemento": {
+            "type": "string"
+          },
+          "pais": {
+            "type": "string"
+          },
           "": {
+            "type": "string"
+          }
+        }
+      },
+      "MeioContato": {
+        "title": "Contato",
+        "type": "object",
+        "properties": {
+          "numero": {
+            "type": "string"
+          },
+          "tipo": {
             "type": "string"
           }
         }
