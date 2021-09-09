@@ -27,6 +27,12 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "requestBody": {
@@ -55,76 +61,50 @@
         ]
       }
     },
-    "/usuarios/{usuarioId}/entes-autoridades": {
+    "/usuarios/{login}/entes": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "usuarioId",
+          "name": "login",
           "in": "path",
           "required": true
         }
       ],
       "post": {
-        "summary": "Realizar cadastro como ente autoridade",
-        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "summary": "Realizar cadastro como ente",
+        "operationId": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ente"
+              }
+            }
+          },
+          "description": ""
         }
       }
     },
-    "/usuarios/{usuarioId}/procuradorias": {
+    "/usuarios/{login}/procuradorias": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "usuarioId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "post": {
-        "summary": "Realizar cadastro como procuradoria",
-        "operationId": "post-usuarios-usuarioId-empresa-privada",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/usuarios/{usuarioId}/promotorias": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "usuarioId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "post": {
-        "summary": "Realizar cadastro como procuradoria",
-        "operationId": "post-usuarios-usuarioId-empresa-privada",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/usuarios/{usuarioId}/defensorias": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "usuarioId",
+          "name": "login",
           "in": "path",
           "required": true
         }
@@ -132,20 +112,108 @@
       "post": {
         "summary": "Realizar cadastro como procuradoria",
         "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Procuradoria"
+              }
+            }
+          }
+        },
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
     },
-    "/usuarios/{usuarioId}/bancas-de-advogados": {
+    "/usuarios/{login}/promotorias": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "usuarioId",
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como promotoria",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Promotoria"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/defensorias-publicas": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como defensoria pública",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DefensoriaPublica"
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/usuarios/{login}/bancas-de-advogados": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
           "in": "path",
           "required": true
         }
@@ -154,19 +222,41 @@
         "summary": "Realizar cadastro como banca de advogados",
         "operationId": "post-usuarios-usuarioId-empresa-privada",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/BancaDeAdvogados"
+              }
+            }
+          },
+          "description": ""
         }
       }
     },
-    "/usuarios/{usuarioId}/cidadoes": {
+    "/usuarios/{login}/cidadoes": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "usuarioId",
+          "name": "login",
           "in": "path",
           "required": true
         }
@@ -178,16 +268,39 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "description": ""
       }
     },
-    "/usuarios/{usuarioId}/advogados": {
+    "/usuarios/{login}/advogados": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "usuarioId",
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar cadastro como advogado",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": ""
+      }
+    },
+    "/usuarios/{login}/procuradores": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
           "in": "path",
           "required": true
         }
@@ -202,34 +315,13 @@
         }
       }
     },
-    "/usuarios/{usuarioId}/procuradores": {
+    "/usuarios/{login}/defensores": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "usuarioId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "post": {
-        "summary": "Realizar cadastro como advogado",
-        "operationId": "post-usuarios-usuarioId-empresa-privada",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/usuarios/{usuarioId}/defensores": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "usuarioId",
+          "name": "login",
           "in": "path",
           "required": true
         }
@@ -241,16 +333,17 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "description": ""
       }
     },
-    "/usuarios/{usuarioId}/promotores": {
+    "/usuarios/{login}/promotores": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "usuarioId",
+          "name": "login",
           "in": "path",
           "required": true
         }
@@ -291,7 +384,7 @@
         "description": "Response padrão da PDPJ"
       },
       "EmpresaPrivada": {
-        "title": "EmpresaPrivada",
+        "title": "Empresa privada",
         "type": "object",
         "properties": {
           "nome-fantasia": {
@@ -300,13 +393,16 @@
           "razao-social": {
             "type": "string"
           },
-          "ramo-atividade": {
-            "type": "string"
-          },
           "CNPJ": {
             "type": "string"
           },
           "data-abertura": {
+            "type": "string"
+          },
+          "atividade-economica-principal": {
+            "type": "string"
+          },
+          "natureza-juridica": {
             "type": "string"
           },
           "responsavel": {
@@ -346,7 +442,323 @@
               "$ref": "#/components/schemas/Endereco"
             }
           }
-        }
+        },
+        "required": [
+          "nome-fantasia",
+          "razao-social",
+          "CNPJ",
+          "data-abertura",
+          "atividade-economica-principal",
+          "natureza-juridica"
+        ]
+      },
+      "EntePublico": {
+        "title": "Ente público",
+        "type": "object",
+        "properties": {
+          "nome-fantasia": {
+            "type": "string"
+          },
+          "razao-social": {
+            "type": "string"
+          },
+          "CNPJ": {
+            "type": "string"
+          },
+          "ente-federativo-responsavel": {
+            "type": "string"
+          },
+          "natureza-juridica": {
+            "type": "string"
+          },
+          "atividade-economica-principal": {
+            "type": "string"
+          },
+          "data-abertura": {
+            "type": "string"
+          },
+          "contato": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeioContato"
+            }
+          },
+          "enderecos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Endereco"
+            }
+          },
+          "UF": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome-fantasia",
+          "razao-social",
+          "CNPJ",
+          "ente-federativo-responsavel",
+          "natureza-juridica",
+          "atividade-economica-principal",
+          "data-abertura",
+          "UF"
+        ]
+      },
+      "Procuradoria": {
+        "title": "Procuradoria",
+        "type": "object",
+        "properties": {
+          "nome-fantasia": {
+            "type": "string"
+          },
+          "razao-social": {
+            "type": "string"
+          },
+          "CNPJ": {
+            "type": "string"
+          },
+          "natureza-juridica": {
+            "type": "string"
+          },
+          "atividade-economica-principal": {
+            "type": "string"
+          },
+          "data-abertura": {
+            "type": "string"
+          },
+          "contato": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeioContato"
+            }
+          },
+          "enderecos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Endereco"
+            }
+          },
+          "procurador-geral": {
+            "type": "object",
+            "required": [
+              "cpf"
+            ],
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              }
+            }
+          },
+          "UF": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome-fantasia",
+          "razao-social",
+          "CNPJ",
+          "natureza-juridica",
+          "atividade-economica-principal",
+          "data-abertura",
+          "procurador-geral",
+          "UF"
+        ]
+      },
+      "Promotoria": {
+        "title": "Procuradoria",
+        "type": "object",
+        "properties": {
+          "nome-fantasia": {
+            "type": "string"
+          },
+          "razao-social": {
+            "type": "string"
+          },
+          "CNPJ": {
+            "type": "string"
+          },
+          "natureza-juridica": {
+            "type": "string"
+          },
+          "atividade-economica-principal": {
+            "type": "string"
+          },
+          "data-abertura": {
+            "type": "string"
+          },
+          "contato": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeioContato"
+            }
+          },
+          "enderecos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Endereco"
+            }
+          },
+          "promotor-geral": {
+            "type": "object",
+            "required": [
+              "cpf"
+            ],
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              }
+            }
+          },
+          "UF": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome-fantasia",
+          "razao-social",
+          "CNPJ",
+          "natureza-juridica",
+          "atividade-economica-principal",
+          "data-abertura",
+          "promotor-geral",
+          "UF"
+        ]
+      },
+      "DefensoriaPublica": {
+        "title": "Defensoria pública",
+        "type": "object",
+        "properties": {
+          "nome-fantasia": {
+            "type": "string"
+          },
+          "razao-social": {
+            "type": "string"
+          },
+          "CNPJ": {
+            "type": "string"
+          },
+          "natureza-juridica": {
+            "type": "string"
+          },
+          "atividade-economica-principal": {
+            "type": "string"
+          },
+          "data-abertura": {
+            "type": "string"
+          },
+          "contato": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeioContato"
+            }
+          },
+          "enderecos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Endereco"
+            }
+          },
+          "defensor-publico-geral": {
+            "type": "object",
+            "required": [
+              "cpf"
+            ],
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              }
+            }
+          },
+          "UF": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome-fantasia",
+          "razao-social",
+          "CNPJ",
+          "natureza-juridica",
+          "atividade-economica-principal",
+          "data-abertura",
+          "defensor-publico-geral",
+          "UF"
+        ]
+      },
+      "BancaDeAdvogados": {
+        "title": "Banca de advogados",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "nome-fantasia": {
+            "type": "string"
+          },
+          "razao-social": {
+            "type": "string"
+          },
+          "CNPJ": {
+            "type": "string"
+          },
+          "OAB": {
+            "type": "string"
+          },
+          "natureza-juridica": {
+            "type": "string"
+          },
+          "atividade-economica-principal": {
+            "type": "string"
+          },
+          "data-abertura": {
+            "type": "string"
+          },
+          "contato": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeioContato"
+            }
+          },
+          "enderecos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Endereco"
+            }
+          },
+          "areas-direito": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo-sgt": {
+                  "type": "string"
+                },
+                "nome": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "codigo-sgt"
+              ]
+            }
+          }
+        },
+        "required": [
+          "nome-fantasia",
+          "razao-social",
+          "CNPJ",
+          "OAB",
+          "natureza-juridica",
+          "atividade-economica-principal",
+          "data-abertura",
+          "areas-direito"
+        ]
       },
       "Endereco": {
         "title": "Endereco",
