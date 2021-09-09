@@ -13,7 +13,7 @@
     "/usuarios/{usuarioId}/acessos": {
       "post": {
         "summary": "Registrar o acesso ao sistema",
-        "operationId": "post-user",
+        "operationId": "",
         "responses": {
           "200": {
             "description": "User Created",
@@ -38,11 +38,11 @@
               }
             }
           },
+          "201": {
+            "description": "Created"
+          },
           "400": {
             "description": "Missing Required Information"
-          },
-          "409": {
-            "description": "Email Already Taken"
           }
         },
         "requestBody": {
@@ -71,7 +71,7 @@
           },
           "description": "Registrar o acesso do usuário ao sistema"
         },
-        "description": "Create a new user."
+        "description": "Registrar o acesso ao sistema"
       },
       "parameters": [
         {
@@ -318,58 +318,45 @@
   },
   "components": {
     "schemas": {
-      "User": {
-        "title": "User",
+      "Response": {
+        "title": "Response",
         "type": "object",
-        "description": "",
-        "examples": [
-          {
-            "id": 142,
-            "firstName": "Alice",
-            "lastName": "Smith",
-            "email": "alice.smith@gmail.com",
-            "dateOfBirth": "1997-10-31",
-            "emailVerified": true,
-            "signUpDate": "2019-08-24"
-          }
-        ],
         "properties": {
-          "id": {
-            "type": "integer",
-            "description": "Unique identifier for the given user."
+          "code": {
+            "type": "integer"
           },
-          "firstName": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "result": {
+            "type": "object"
+          },
+          "status": {
             "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string",
-            "format": "email"
-          },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date",
-            "example": "1997-10-31"
-          },
-          "emailVerified": {
-            "type": "boolean",
-            "description": "Set to true if the user's email has been verified."
-          },
-          "createDate": {
-            "type": "string",
-            "format": "date",
-            "description": "The date that the user was created."
           }
-        },
-        "required": [
-          "id",
-          "firstName",
-          "lastName",
-          "email",
-          "emailVerified"
-        ]
+        }
+      }
+    },
+    "responses": {
+      "teste": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            },
+            "examples": {}
+          },
+          "application/xml": {
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        }
       }
     }
   }
