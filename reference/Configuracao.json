@@ -10,87 +10,13 @@
     }
   ],
   "paths": {
-    "/usuarios/{usuarioId}/acessos": {
-      "post": {
-        "summary": "Registrar o acesso ao sistema",
-        "operationId": "",
-        "responses": {
-          "200": {
-            "description": "User Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "examples": {
-                  "New User Bob Fellow": {
-                    "value": {
-                      "id": 12,
-                      "firstName": "Bob",
-                      "lastName": "Fellow",
-                      "email": "bob.fellow@gmail.com",
-                      "dateOfBirth": "1996-08-24",
-                      "emailVerified": false,
-                      "createDate": "2020-11-18"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Missing Required Information"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              },
-              "examples": {
-                "Create User Bob Fellow": {
-                  "value": {
-                    "firstName": "Bob",
-                    "lastName": "Fellow",
-                    "email": "bob.fellow@gmail.com",
-                    "dateOfBirth": "1996-08-24"
-                  }
-                }
-              }
-            },
-            "text/plain": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          },
-          "description": "Registrar o acesso do usuário ao sistema"
-        },
-        "description": "Registrar o acesso ao sistema"
-      },
+    "/usuarios/{login}/empresas-privadas": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "usuarioId",
-          "in": "path",
-          "required": true
-        }
-      ]
-    },
-    "/usuarios/{usuarioId}/empresas-privadas": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "usuarioId",
+          "name": "login",
           "in": "path",
           "required": true
         }
@@ -102,7 +28,32 @@
           "201": {
             "description": "Created"
           }
-        }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Autorization"
+          }
+        ]
       }
     },
     "/usuarios/{usuarioId}/entes-autoridades": {
@@ -337,27 +288,25 @@
           "status": {
             "type": "string"
           }
-        }
-      }
-    },
-    "responses": {
-      "teste": {
-        "description": "Example response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object"
-            },
-            "examples": {}
+        },
+        "description": "Response padrão da PDPJ"
+      },
+      "EmpresaPrivada": {
+        "title": "EmpresaPrivada",
+        "type": "object",
+        "properties": {
+          "razao-social": {
+            "type": "string"
           },
-          "application/xml": {
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
+          "ramo-atividade": {
+            "type": "string"
+          },
+          "": {
+            "type": "string"
           }
         }
       }
-    }
+    },
+    "responses": {}
   }
 }
