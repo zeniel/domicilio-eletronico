@@ -265,11 +265,26 @@
         "summary": "Realizar cadastro como cidadão",
         "operationId": "post-usuarios-usuarioId-empresa-privada",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
-        "description": ""
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cidadao"
+              }
+            }
+          }
+        }
       }
     },
     "/usuarios/{login}/advogados": {
@@ -287,11 +302,26 @@
         "summary": "Realizar cadastro como advogado",
         "operationId": "post-usuarios-usuarioId-empresa-privada",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
-        "description": ""
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Advogado"
+              }
+            }
+          }
+        }
       }
     },
     "/usuarios/{login}/procuradores": {
@@ -383,7 +413,7 @@
         },
         "description": "Response padrão da PDPJ"
       },
-      "EmpresaPrivada": {
+      "RegistroEmpresaPrivada": {
         "title": "Empresa privada",
         "type": "object",
         "properties": {
@@ -452,7 +482,7 @@
           "natureza-juridica"
         ]
       },
-      "EntePublico": {
+      "RegistroEntePublico": {
         "title": "Ente público",
         "type": "object",
         "properties": {
@@ -504,7 +534,7 @@
           "UF"
         ]
       },
-      "Procuradoria": {
+      "RegistroProcuradoria": {
         "title": "Procuradoria",
         "type": "object",
         "properties": {
@@ -567,7 +597,7 @@
           "UF"
         ]
       },
-      "Promotoria": {
+      "RegistroPromotoria": {
         "title": "Procuradoria",
         "type": "object",
         "properties": {
@@ -630,7 +660,7 @@
           "UF"
         ]
       },
-      "DefensoriaPublica": {
+      "RegistroDefensoriaPublica": {
         "title": "Defensoria pública",
         "type": "object",
         "properties": {
@@ -693,7 +723,7 @@
           "UF"
         ]
       },
-      "BancaDeAdvogados": {
+      "RegistroBancaDeAdvogados": {
         "title": "Banca de advogados",
         "type": "object",
         "description": "",
@@ -804,6 +834,62 @@
             "type": "string"
           }
         }
+      },
+      "RegistroCidadao": {
+        "title": "Cidadao",
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "nome-social": {
+            "type": "string"
+          },
+          "CPF": {
+            "type": "string"
+          },
+          "passaporte": {
+            "type": "string"
+          },
+          "sexo": {
+            "type": "string"
+          },
+          "data-nascimento": {
+            "type": "string"
+          },
+          "data-obito": {
+            "type": "string"
+          },
+          "municipio-nascimento": {
+            "type": "string"
+          },
+          "pais-nascimento": {
+            "type": "string"
+          }
+        }
+      },
+      "RegistroAdvogado": {
+        "title": "Advogado",
+        "type": "object",
+        "properties": {
+          "oab": {
+            "type": "string"
+          },
+          "escritorio": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "oab": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "oab"
+        ]
       }
     },
     "responses": {}
