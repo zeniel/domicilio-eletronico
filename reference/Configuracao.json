@@ -26,7 +26,27 @@
         "operationId": "post-usuarios-usuarioId-empresa-privada",
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "documento": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "conteudo": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -587,6 +607,63 @@
             "name": "Authorization"
           }
         ]
+      }
+    },
+    "/usuarios/{login}/termos-compromissos": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Assinatura do termo de compromisso",
+        "operationId": "post-usuarios-login-termos-compromissos",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assinatura": {
+                    "type": "object",
+                    "properties": {
+                      "hash": {
+                        "type": "string"
+                      },
+                      "algoritmoHash": {
+                        "type": "string"
+                      },
+                      "cadeiaCeriticado": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "hash",
+                      "algoritmoHash",
+                      "cadeiaCeriticado"
+                    ]
+                  },
+                  "idDocumento": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "idDocumento"
+                ]
+              }
+            }
+          }
+        }
       }
     }
   },
