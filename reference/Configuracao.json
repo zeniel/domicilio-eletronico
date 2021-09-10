@@ -665,6 +665,172 @@
           }
         }
       }
+    },
+    "/colaboradores": {
+      "get": {
+        "summary": "Recupera colaboradores",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Nenhum colaborador encontrado"
+          }
+        },
+        "operationId": "get-colaboradores",
+        "description": "Recupera colaboradores",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "documentoIdentificacao",
+            "description": "CPF / CNPJ do administrador",
+            "required": true
+          }
+        ]
+      },
+      "post": {
+        "summary": "Cadastra colaborador",
+        "operationId": "post-colaboradores",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Cadastra colaborador",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "documentoIdentificacao",
+            "description": "CPF / CNPJ do administrador",
+            "required": true
+          }
+        ]
+      },
+      "put": {
+        "summary": "Altera cadastro do colaborador",
+        "operationId": "put-colaboradores",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "documentoIdentificacao",
+            "description": "CPF / CNPJ do administrador",
+            "required": true
+          }
+        ],
+        "description": "Altera cadastro do colaborador"
+      }
+    },
+    "/colaboradores/{id}/permissoes": {
+      "get": {
+        "summary": "Recupera permissões do colaborador",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "get-colaboradores-permissoes",
+        "description": "Recupera permissões do colaborador",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "CPF / CNPJ do administrador",
+            "name": "documentoIdentificacao"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Identificador do colaborador"
+        }
+      ],
+      "post": {
+        "summary": "Cadastro permissão do colaborador",
+        "operationId": "post-colaboradores-id-permissoes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Cadastro permissão do colaborador",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "description": "CPF / CNPJ do administrador",
+            "name": "documentoIdentificacao"
+          }
+        ]
+      },
+      "put": {
+        "summary": "Altera permissões do colaborador",
+        "operationId": "put-colaboradores-id-permissoes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "documentoIdentificacao",
+            "description": "CPF / CNPJ do administrador"
+          }
+        ]
+      }
     }
   },
   "components": {
