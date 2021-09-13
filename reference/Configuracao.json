@@ -952,6 +952,30 @@
             "in": "header",
             "name": "Authorization",
             "description": "Bearer ..."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "cnpj",
+            "description": "CNPJ da pessoa jurídica que tem os representantes"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "oab-representante",
+            "description": "OAB do representante"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "cnpj-representante",
+            "description": "CNPJ do representante"
           }
         ],
         "requestBody": {
@@ -982,7 +1006,21 @@
             }
           }
         },
-        "description": "Cadastra representante"
+        "description": "Cadastra representante",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistroRepresentante"
+              }
+            }
+          }
+        }
       }
     },
     "/representantes/{login}": {
@@ -1770,9 +1808,6 @@
         "title": "Representante",
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
           "oab": {
             "type": "string"
           },
@@ -1784,6 +1819,21 @@
           "oab",
           "cnpj"
         ]
+      },
+      "RegistroRepresentante": {
+        "title": "RegistroRepresentante",
+        "type": "object",
+        "properties": {
+          "cnpj": {
+            "type": "string"
+          },
+          "oab-representante": {
+            "type": "string"
+          },
+          "cnpj-representante": {
+            "type": "string"
+          }
+        }
       }
     },
     "responses": {},
