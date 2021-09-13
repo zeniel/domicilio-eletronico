@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/usuarios/{login}/empresas-privadas": {
+    "/usuarios/{login}/empresas": {
       "parameters": [
         {
           "schema": {
@@ -22,31 +22,11 @@
         }
       ],
       "post": {
-        "summary": "Realizar cadastro como empresa privada",
+        "summary": "Realizar cadastro como empresa",
         "operationId": "post-usuarios-usuarioId-empresa-privada",
         "responses": {
           "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "documento": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "conteudo": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
@@ -59,7 +39,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EmpresaPrivada"
+                "$ref": "#/components/schemas/RegistroEmpresa"
               }
             },
             "application/xml": {
@@ -81,7 +61,35 @@
         ]
       }
     },
-    "/usuarios/{login}/entes": {
+    "/usuarios/{login}/empresas/termosCompromissos": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Recuperar termos de compromisso do usuário no perfil de empresa",
+        "operationId": "get-usuarios-login-empresas-termosCompromissos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/entes-publicos": {
       "parameters": [
         {
           "schema": {
@@ -97,7 +105,15 @@
         "operationId": "",
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -110,7 +126,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Ente"
+                "$ref": "#/components/schemas/RegistroEntePublico"
               }
             }
           },
@@ -125,6 +141,36 @@
             "name": "Authorization"
           }
         ]
+      }
+    },
+    "/usuarios/{login}/entes-publicos/termos-compromissos": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Recuperar termos de compromisso do usuário no perfil de ente público",
+        "operationId": "get-usuarios-login-entes-publicos",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/usuarios/{login}/tipos-cadastros": {
@@ -208,7 +254,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Procuradoria"
+                "$ref": "#/components/schemas/RegistroProcuradoria"
               }
             }
           }
@@ -233,6 +279,34 @@
             "name": "Authorization"
           }
         ]
+      }
+    },
+    "/usuarios/{login}/procuradorias/termos-compromissos": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Recuperar termos de compromisso do usuário no perfil de procuradorias",
+        "operationId": "get-usuarios-login-procuradorias",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/usuarios/{login}/promotorias": {
@@ -264,7 +338,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Promotoria"
+                "$ref": "#/components/schemas/RegistroPromotoria"
               }
             }
           }
@@ -278,6 +352,34 @@
             "name": "Authorization"
           }
         ]
+      }
+    },
+    "/usuarios/{login}/promotorias/termos-compromissos": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Recuperar termos de compromisso do usuário no perfil de promotorias",
+        "operationId": "get-usuarios-login-promotorias-termos-compromissos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/usuarios/{login}/defensorias-publicas": {
@@ -309,7 +411,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DefensoriaPublica"
+                "$ref": "#/components/schemas/RegistroDefensoriaPublica"
               }
             }
           },
@@ -355,8 +457,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {}
+                "$ref": "#/components/schemas/RegistroBancaDeAdvogados"
               }
             },
             "application/xml": {
@@ -408,7 +509,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Cidadao"
+                "$ref": "#/components/schemas/RegistroCidadao"
               }
             }
           }
@@ -609,50 +710,51 @@
         ]
       }
     },
-    "/usuarios/termos-compromissos": {
-      "parameters": [],
-      "post": {
-        "summary": "Assinatura do termo de compromisso",
-        "operationId": "post-usuarios-login-termos-compromissos",
+    "/termos-compromissos/{uuid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Recuperar termo de compromisso",
+        "operationId": "get-usuarios-login-termos-compromissos:assinar",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseTermoCompromisso"
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Assinar termo de compromisso",
+        "operationId": "put-termos-compromissos-uuid",
         "responses": {
           "200": {
             "description": "OK"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "assinatura": {
-                    "type": "object",
-                    "properties": {
-                      "hash": {
-                        "type": "string"
-                      },
-                      "algoritmoHash": {
-                        "type": "string"
-                      },
-                      "cadeiaCeriticado": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "hash",
-                      "algoritmoHash",
-                      "cadeiaCeriticado"
-                    ]
-                  },
-                  "idDocumento": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "idDocumento"
-                ]
-              }
-            }
           }
         },
         "parameters": [
@@ -661,16 +763,24 @@
               "type": "string"
             },
             "in": "header",
-            "name": "Authorization",
-            "description": "Bearer ...",
-            "required": true
+            "name": "Authorization"
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assinatura"
+              }
+            }
+          },
+          "description": ""
+        }
       }
     },
     "/colaboradores": {
       "get": {
-        "summary": "Recupera colaboradores",
+        "summary": "Recuperar colaboradores",
         "tags": [],
         "responses": {
           "200": {
@@ -726,7 +836,7 @@
         ]
       },
       "post": {
-        "summary": "Cadastra colaborador",
+        "summary": "Cadastrar colaborador",
         "operationId": "post-colaboradores",
         "responses": {
           "201": {
@@ -774,7 +884,7 @@
         }
       ],
       "get": {
-        "summary": "Recupera colaborador",
+        "summary": "Recuperar colaborador",
         "tags": [],
         "responses": {
           "200": {
@@ -791,7 +901,7 @@
         "operationId": "get-colaboradores-login"
       },
       "put": {
-        "summary": "Altera colaborador",
+        "summary": "Alterar colaborador",
         "operationId": "put-colaboradores-login",
         "responses": {
           "200": {
@@ -810,7 +920,7 @@
     },
     "/colaboradores/{login}/permissoes": {
       "get": {
-        "summary": "Recupera permissões do colaborador",
+        "summary": "Recuperar permissões do colaborador",
         "tags": [],
         "responses": {
           "200": {
@@ -859,7 +969,7 @@
         }
       ],
       "post": {
-        "summary": "Cadastro permissão do colaborador",
+        "summary": "Cadastrar permissão do colaborador",
         "operationId": "post-colaboradores-id-permissoes",
         "responses": {
           "200": {
@@ -901,7 +1011,7 @@
         ]
       },
       "put": {
-        "summary": "Altera permissões do colaborador",
+        "summary": "Alterar permissões do colaborador",
         "operationId": "put-colaboradores-id-permissoes",
         "responses": {
           "200": {
@@ -968,7 +1078,7 @@
         }
       },
       "post": {
-        "summary": "Cadastra representante",
+        "summary": "Cadastrar representante",
         "operationId": "post-representantes",
         "responses": {
           "200": {
@@ -987,7 +1097,7 @@
     },
     "/representantes/{login}": {
       "get": {
-        "summary": "Recupera representantes",
+        "summary": "Recuperar representantes",
         "tags": [],
         "responses": {
           "200": {
@@ -1033,7 +1143,7 @@
         }
       ],
       "put": {
-        "summary": "Altera representante (aprova / reprova vínculo)",
+        "summary": "Alterar representante (aprova / reprova vínculo)",
         "operationId": "put-representantes",
         "responses": {
           "200": {
@@ -1376,7 +1486,7 @@
         },
         "description": "Response padrão da PDPJ"
       },
-      "RegistroEmpresaPrivada": {
+      "RegistroEmpresa": {
         "title": "Empresa privada",
         "type": "object",
         "properties": {
@@ -2010,6 +2120,42 @@
             ]
           },
           "valor": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseTermoCompromisso": {
+        "title": "ResponseTermoCompromisso",
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "conteudo": {
+            "type": "string"
+          },
+          "assinatura": {
+            "$ref": "#/components/schemas/Assinatura"
+          }
+        }
+      },
+      "Assinatura": {
+        "title": "Assinatura",
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "string"
+          },
+          "algoritmoHash": {
+            "type": "string"
+          },
+          "cadeiaCertificado": {
+            "type": "string"
+          },
+          "dataAssinatura": {
+            "type": "string"
+          },
+          "codificacaoCadeiaCertificado": {
             "type": "string"
           }
         }
