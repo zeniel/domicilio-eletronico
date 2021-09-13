@@ -2166,7 +2166,7 @@
     },
     "/usuarios/contatos": {
       "get": {
-        "summary": "Recupera contatos",
+        "summary": "Recuperar contatos",
         "tags": [],
         "responses": {
           "200": {
@@ -2205,7 +2205,7 @@
                         "number"
                       ]
                     },
-                    "": {
+                    "contato": {
                       "$ref": "#/components/schemas/Contato"
                     }
                   }
@@ -2216,7 +2216,7 @@
         }
       },
       "post": {
-        "summary": "Cria contato",
+        "summary": "Criar contato",
         "operationId": "post-usuarios-contatos",
         "responses": {
           "200": {
@@ -2229,7 +2229,7 @@
                     "id": {
                       "type": "number"
                     },
-                    "": {
+                    "contato": {
                       "$ref": "#/components/schemas/Contato"
                     }
                   }
@@ -2256,7 +2256,7 @@
         }
       },
       "put": {
-        "summary": "Atualiza contato",
+        "summary": "Atualizar contato",
         "operationId": "put-usuarios-contatos",
         "responses": {
           "200": {
@@ -2269,7 +2269,7 @@
                     "id": {
                       "type": "number"
                     },
-                    "": {
+                    "contato": {
                       "$ref": "#/components/schemas/Contato"
                     }
                   }
@@ -2294,7 +2294,7 @@
                   "id": {
                     "type": "number"
                   },
-                  "": {
+                  "contato": {
                     "$ref": "#/components/schemas/Contato"
                   }
                 }
@@ -2302,11 +2302,12 @@
             }
           }
         }
-      }
+      },
+      "parameters": []
     },
     "/usuarios/emails:validar": {
       "put": {
-        "summary": "Valida email",
+        "summary": "Validar email",
         "operationId": "put-usuarios-emails:validar",
         "responses": {
           "200": {
@@ -2341,11 +2342,12 @@
           }
         },
         "description": "Valida email"
-      }
+      },
+      "parameters": []
     },
     "/usuarios/telefones:validar": {
       "put": {
-        "summary": "Valida telefone",
+        "summary": "Validar telefone",
         "operationId": "put-usuarios-telefone:validar",
         "responses": {
           "200": {
@@ -3223,5 +3225,10 @@
     },
     "responses": {},
     "securitySchemes": {}
-  }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
 }
