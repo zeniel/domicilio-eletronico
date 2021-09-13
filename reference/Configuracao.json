@@ -1081,10 +1081,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Permissao"
-                }
+                "$ref": "#/components/schemas/Response"
               }
             }
           }
@@ -1134,6 +1131,225 @@
           }
         }
       }
+    },
+    "/usuarios/contatos": {
+      "get": {
+        "summary": "Recupera contatos",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "get-usuarios-contatos",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "login",
+            "description": "Identificador do usuário"
+          }
+        ],
+        "description": "Recupera contatos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": [
+                        "string",
+                        "number"
+                      ]
+                    },
+                    "": {
+                      "$ref": "#/components/schemas/Contato"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cria contato",
+        "operationId": "post-usuarios-contatos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "": {
+                      "$ref": "#/components/schemas/Contato"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Cria contato",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contato"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza contato",
+        "operationId": "put-usuarios-contatos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "": {
+                      "$ref": "#/components/schemas/Contato"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Atualiza contato",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "": {
+                    "$ref": "#/components/schemas/Contato"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/emails:validar": {
+      "put": {
+        "summary": "Valida email",
+        "operationId": "put-usuarios-emails:validar",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "codigoValidacao": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "codigoValidacao"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Valida email"
+      }
+    },
+    "/usuarios/telefones:validar": {
+      "put": {
+        "summary": "Valida telefone",
+        "operationId": "put-usuarios-telefone:validar",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "Valida telefone",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "telefone": {
+                    "type": "string"
+                  },
+                  "codigoValidacao": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "telefone",
+                  "codigoValidacao"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "parameters": []
     }
   },
   "components": {
@@ -1770,9 +1986,6 @@
         "title": "Representante",
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
           "oab": {
             "type": "string"
           },
@@ -1784,6 +1997,22 @@
           "oab",
           "cnpj"
         ]
+      },
+      "Contato": {
+        "title": "Contato",
+        "type": "object",
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "email",
+              "telefone"
+            ]
+          },
+          "valor": {
+            "type": "string"
+          }
+        }
       }
     },
     "responses": {},
