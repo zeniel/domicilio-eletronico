@@ -136,7 +136,7 @@
         ]
       },
       "get": {
-        "summary": "Recuperar grupos de empresas",
+        "summary": "Listar grupos de empresas",
         "operationId": "get-usuarios-login-empresas-grupos",
         "responses": {
           "200": {
@@ -197,6 +197,32 @@
                 "schema": {
                   "$ref": "#/components/schemas/GrupoEmpresa"
                 }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Renomear grupo de empresas",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "nome"
+                ]
               }
             }
           }
@@ -602,6 +628,432 @@
           },
           "description": ""
         },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ]
+      }
+    },
+    "/usuarios/{login}/entes-publicos/grupos": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Cadastrar grupo de entes públicos",
+        "operationId": "",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "nome"
+                ]
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ]
+      },
+      "get": {
+        "summary": "Listar grupos de entes públicos",
+        "operationId": "get-usuarios-login-entes-publicos-grupos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GrupoEntesPublicos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/entes-publicos/grupos/{uuid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Recuperar grupo de entes públicos",
+        "operationId": "get-usuarios-login-entes-publicos-grupos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GrupoEntesPublicos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Renomear grupo de entes públicos",
+        "operationId": "put-usuarios-login-entes-publicos-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/empresas/grupos/{uuid}/entes-vinculados": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Adicionar entes vinculados",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CNPJ"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remover entes vinculados",
+        "operationId": "delete-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CNPJ"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Recuperar entes vinculados",
+        "operationId": "get-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EntePublicoSimples"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    },
+    "/usuarios/{login}/entes-publicos/autoridades": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Cadastrar autoridade pública",
+        "operationId": "",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutoridadePublica"
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ]
+      },
+      "get": {
+        "summary": "Listar autoridades públicas",
+        "operationId": "get-usuarios-login-entes-publicos-grupos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AutoridadePublica"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ]
+      }
+    },
+    "/usuarios/{login}/entes-publicos/autoridades/{uuid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Listar autoridades públicas",
+        "operationId": "get-usuarios-login-entes-publicos-grupos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutoridadePublica"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ]
+      },
+      "put": {
+        "summary": "Atualizar autoridade pública",
+        "operationId": "put-usuarios-login-entes-publicos-autoridades-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutoridadePublica"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ]
+      }
+    },
+    "/usuarios/{login}/entes-publicos/autoridades/{autoridade-a-uuid}/{autoridade-b-uuid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "autoridade-a-uuid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "autoridade-b-uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Unificar autoridades públicas",
+        "operationId": "put-usuarios-login-entes-publicos-autoridades-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Unifica o cadastro da autoridade identificada por: autoridade-b-uuid no cadastro da autoridade-a-uuid",
         "parameters": [
           {
             "schema": {
@@ -2657,8 +3109,44 @@
           "nome"
         ]
       },
+      "GrupoEntesPublicos": {
+        "title": "GrupoEntesPublicos",
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "entes-vinculados": {
+            "$ref": "#/components/schemas/EntePublicoSimples"
+          }
+        },
+        "required": [
+          "nome"
+        ]
+      },
       "EmpresaSimples": {
         "title": "EmpresaSimples",
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "razao-social": {
+            "type": "string"
+          },
+          "nome-fantasia": {
+            "type": "string"
+          }
+        }
+      },
+      "EntePublicoSimples": {
+        "title": "EntePublico",
         "type": "object",
         "properties": {
           "uuid": {
@@ -2707,6 +3195,30 @@
             "type": "string"
           }
         }
+      },
+      "AutoridadePublica": {
+        "title": "AutoridadePublica",
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "data-inicio": {
+            "type": "string"
+          },
+          "data-termino": {
+            "type": "string"
+          },
+          "ativo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "nome"
+        ]
       }
     },
     "responses": {},
