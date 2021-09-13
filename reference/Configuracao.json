@@ -61,6 +61,476 @@
         ]
       }
     },
+    "/usuarios/{login}/empresas/grupos": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Cadastrar grupo de empresas",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "nome"
+                ]
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ]
+      },
+      "get": {
+        "summary": "Recuperar grupos de empresas",
+        "operationId": "get-usuarios-login-empresas-grupos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GrupoEmpresa"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/empresas/grupos/{uuid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Recuperar grupo de empresa",
+        "operationId": "get-usuarios-login-empresas-grupos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GrupoEmpresa"
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoEmpresa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/empresas/grupos/{uuid}/representantes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Adicionar representantes",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Representante"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-usuarios-login-empresas-grupos-uuid-representantes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Representante"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Recuperar representantes",
+        "operationId": "get-usuarios-login-empresas-grupos-uuid-representantes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseRepresentante"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/empresas/grupos/{uuid}/filiais": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Adicionar filiais",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CNPJ"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remover filiais",
+        "operationId": "delete-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CNPJ"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Recuperar filiais",
+        "operationId": "get-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmpresaSimples"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/empresas/grupos/{uuid}/coligadas": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Adicionar coligadas",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CNPJ"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remover coligadas",
+        "operationId": "delete-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CNPJ"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Recuperar coligadas",
+        "operationId": "get-usuarios-login-empresas-grupos-uuid-coligadas",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmpresaSimples"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/empresas/grupos/{uuid}/coligadas/pendentes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Recuperar solicitações de vínculo como coligadas pendentes",
+        "operationId": "get-usuarios-login-empresas-grupos-uuid-coligadas",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmpresaSimples"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/empresas/grupos/{uuid}/coligadas/{cnpj}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cnpj",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Aprovar solicitação de vínculo como coligada",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid-coligadas-pendentes---copy",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Negar solicitação de vínculo como coligada",
+        "operationId": "delete-usuarios-login-empresas-grupos-uuid-coligadas-cnpj",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/usuarios/{login}/empresas/termosCompromissos": {
       "parameters": [
         {
@@ -2156,6 +2626,84 @@
             "type": "string"
           },
           "codificacaoCadeiaCertificado": {
+            "type": "string"
+          }
+        }
+      },
+      "GrupoEmpresa": {
+        "title": "GrupoEmpresa",
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "representantes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Representante"
+            }
+          },
+          "filiais": {
+            "$ref": "#/components/schemas/EmpresaSimples"
+          },
+          "coligadas": {
+            "$ref": "#/components/schemas/EmpresaSimples"
+          }
+        },
+        "required": [
+          "nome"
+        ]
+      },
+      "EmpresaSimples": {
+        "title": "EmpresaSimples",
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "razao-social": {
+            "type": "string"
+          },
+          "nome-fantasia": {
+            "type": "string"
+          }
+        }
+      },
+      "CNPJ": {
+        "title": "CNPJ",
+        "type": "object",
+        "properties": {
+          "cnpj": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cnpj"
+        ]
+      },
+      "ResponseRepresentante": {
+        "title": "ResponseRepresentante",
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "oab": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "tipo": {
             "type": "string"
           }
         }
