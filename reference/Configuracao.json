@@ -918,6 +918,53 @@
         ]
       }
     },
+    "/usuarios/{login}/entes-publicos/autoridades/{autoridade-a-uuid}/{autoridade-b-uuid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "autoridade-a-uuid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "autoridade-b-uuid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Unificar autoridades públicas",
+        "operationId": "put-usuarios-login-entes-publicos-autoridades-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Unifica o cadastro da autoridade identificada por: autoridade-b-uuid no cadastro da autoridade-a-uuid",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ]
+      }
+    },
     "/usuarios/{login}/entes-publicos/autoridades/{uuid}": {
       "parameters": [
         {
@@ -979,53 +1026,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "Authorization"
-          }
-        ]
-      }
-    },
-    "/usuarios/{login}/entes-publicos/autoridades/{autoridade-a-uuid}/{autoridade-b-uuid}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "login",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "autoridade-a-uuid",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "autoridade-b-uuid",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "put": {
-        "summary": "Unificar autoridades públicas",
-        "operationId": "put-usuarios-login-entes-publicos-autoridades-uuid",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "description": "Unifica o cadastro da autoridade identificada por: autoridade-b-uuid no cadastro da autoridade-a-uuid",
         "parameters": [
           {
             "schema": {
@@ -1145,6 +1145,147 @@
         ]
       }
     },
+    "/usuarios/{login}/procuradorias/procuradores": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Vincular procurador à procuradoria",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CPF"
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/BancaDeAdvogados"
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ],
+        "description": ""
+      },
+      "get": {
+        "summary": "Pesquisar procuradores vinculados",
+        "operationId": "get-usuarios-login-bancas-de-advogados-advogados",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PessoaFisica"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/procuradorias/procuradores/{cpf}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpf",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Aprovar vinculo de procurador",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Reprovar/remover vinculo de procurador",
+        "operationId": "delete-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "summary": "Recuperar procurador vinculado",
+        "operationId": "get-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Advogado"
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PessoaFisica"
+                }
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    },
     "/usuarios/{login}/promotorias": {
       "parameters": [
         {
@@ -1188,6 +1329,147 @@
             "name": "Authorization"
           }
         ]
+      }
+    },
+    "/usuarios/{login}/promotorias/promotores": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Vincular promotor à promotoria",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CPF"
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/BancaDeAdvogados"
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ],
+        "description": ""
+      },
+      "get": {
+        "summary": "Pesquisar promotores vinculados",
+        "operationId": "get-usuarios-login-bancas-de-advogados-advogados",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PessoaFisica"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/promotorias/promotores/{cpf}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpf",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Aprovar vinculo de promotor",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Reprovar/remover vinculo de promotor",
+        "operationId": "delete-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "summary": "Recuperar promotor vinculado",
+        "operationId": "get-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Advogado"
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PessoaFisica"
+                }
+              }
+            }
+          }
+        },
+        "description": ""
       }
     },
     "/usuarios/{login}/defensorias-publicas": {
@@ -1285,6 +1567,287 @@
             "name": "Authorization"
           }
         ]
+      }
+    },
+    "/usuarios/{login}/bancas-de-advogados/advogados": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Vincular advogado à banca",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IdentificacaoAdvogado"
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/BancaDeAdvogados"
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ]
+      },
+      "get": {
+        "summary": "Pesquisar advogados vinculados",
+        "operationId": "get-usuarios-login-bancas-de-advogados-advogados",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Advogado"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/bancas-de-advogados/advogados/{oab}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "oab",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Aprovar vinculo de advogado",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Reprovar/remover vinculo de advogado",
+        "operationId": "delete-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "summary": "Recuperar advogado vinculado",
+        "operationId": "get-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Advogado"
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Advogado"
+                }
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    },
+    "/usuarios/{login}/bancas-de-advogados/assistentes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Vincular assistente à banca",
+        "operationId": "post-usuarios-usuarioId-empresa-privada",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IdentificacaoAdvogado"
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/BancaDeAdvogados"
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization"
+          }
+        ],
+        "description": "Pode-se vincular um assistente sem OAB ou um estagiário de direito que possua uma OAB"
+      },
+      "get": {
+        "summary": "Pesquisar assistentes vinculados",
+        "operationId": "get-usuarios-login-bancas-de-advogados-advogados",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Advogado"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{login}/bancas-de-advogados/assistentes/{cpf}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpf",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Aprovar vinculo de assistente",
+        "operationId": "put-usuarios-login-empresas-grupos-uuid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Reprovar/remover vinculo de assistente",
+        "operationId": "delete-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "summary": "Recuperar assistente vinculado",
+        "operationId": "get-usuarios-login-empresas-grupos-uuid-filiais",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Advogado"
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PessoaFisica"
+                }
+              }
+            }
+          }
+        },
+        "description": ""
       }
     },
     "/usuarios/{login}/cidadoes": {
@@ -3327,6 +3890,18 @@
           "cnpj"
         ]
       },
+      "CPF": {
+        "title": "CPF",
+        "type": "object",
+        "properties": {
+          "cpf": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cpf"
+        ]
+      },
       "ResponseRepresentante": {
         "title": "ResponseRepresentante",
         "type": "object",
@@ -3398,6 +3973,40 @@
           "id",
           "nomeDefensoria",
           "estado"
+        ]
+      },
+      "IdentificacaoAdvogado": {
+        "title": "IdentificacaoAdvogado",
+        "type": "object",
+        "properties": {
+          "identificacao": {
+            "anyOf": []
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "oab": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "identificacao"
+        ]
+      },
+      "Advogado": {
+        "title": "Advogado",
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "identificador": {
+            "$ref": "#/components/schemas/IdentificacaoAdvogado"
+          }
+        },
+        "required": [
+          "nome",
+          "identificador"
         ]
       }
     },
