@@ -557,34 +557,6 @@
         }
       }
     },
-    "/usuarios/{login}/empresas/termosCompromissos": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "login",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Recuperar termos de compromisso do usuário no perfil de empresa",
-        "operationId": "get-usuarios-login-empresas-termosCompromissos",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/usuarios/{login}/entes-publicos": {
       "parameters": [
         {
@@ -1065,36 +1037,6 @@
         ]
       }
     },
-    "/usuarios/{login}/entes-publicos/termos-compromissos": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "login",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Recuperar termos de compromisso do usuário no perfil de ente público",
-        "operationId": "get-usuarios-login-entes-publicos",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/usuarios/{login}/tipos-cadastros": {
       "parameters": [
         {
@@ -1203,34 +1145,6 @@
         ]
       }
     },
-    "/usuarios/{login}/procuradorias/termos-compromissos": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "login",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Recuperar termos de compromisso do usuário no perfil de procuradorias",
-        "operationId": "get-usuarios-login-procuradorias",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/usuarios/{login}/promotorias": {
       "parameters": [
         {
@@ -1274,34 +1188,6 @@
             "name": "Authorization"
           }
         ]
-      }
-    },
-    "/usuarios/{login}/promotorias/termos-compromissos": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "login",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Recuperar termos de compromisso do usuário no perfil de promotorias",
-        "operationId": "get-usuarios-login-promotorias-termos-compromissos",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/usuarios/{login}/defensorias-publicas": {
@@ -1632,6 +1518,46 @@
         ]
       }
     },
+    "/usuarios/{login}/termos-compromissos": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "login",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Pesquisar termos de compromisso do usuário",
+        "operationId": "get-usuarios-login-entes-publicos",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseTermoCompromisso"
+                  }
+                }
+              }
+            }
+          },
+          "": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/termos-compromissos/{uuid}": {
       "parameters": [
         {
@@ -1652,10 +1578,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ResponseTermoCompromisso"
-                  }
+                  "$ref": "#/components/schemas/ResponseTermoCompromisso"
                 }
               }
             }
@@ -3060,6 +2983,27 @@
           },
           "assinatura": {
             "$ref": "#/components/schemas/Assinatura"
+          },
+          "cadastro": {
+            "oneOf": [
+              {
+                "properties": {},
+                "enum": [
+                  "empresa",
+                  "procuradoria",
+                  "promotoria",
+                  "defensoria-publica",
+                  "ente-publico",
+                  "banca-advogados",
+                  "cidadao",
+                  "advogado",
+                  "procurador",
+                  "promotor",
+                  "defensor"
+                ]
+              }
+            ],
+            "type": "string"
           }
         }
       },
@@ -3224,7 +3168,12 @@
       }
     },
     "responses": {},
-    "securitySchemes": {}
+    "securitySchemes": {
+      "Authorization": {
+        "type": "oauth2",
+        "description": ""
+      }
+    }
   },
   "security": [
     {
