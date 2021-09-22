@@ -1,0 +1,2828 @@
+openapi: 3.1.0
+info:
+  title: Configuração
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/usuarios/{login}/empresas':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como empresa
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroEmpresa'
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/empresas/grupos':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Cadastrar grupo de empresas
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+              required:
+                - nome
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    get:
+      summary: Listar grupos de empresas
+      operationId: get-usuarios-login-empresas-grupos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GrupoEmpresa'
+  '/usuarios/{login}/empresas/grupos/{uuid}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    get:
+      summary: Recuperar grupo de empresa
+      operationId: get-usuarios-login-empresas-grupos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GrupoEmpresa'
+        '':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrupoEmpresa'
+    put:
+      summary: Renomear grupo de empresas
+      operationId: put-usuarios-login-empresas-grupos-uuid
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+              required:
+                - nome
+  '/usuarios/{login}/empresas/grupos/{uuid}/representantes':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    put:
+      summary: Adicionar representantes
+      operationId: put-usuarios-login-empresas-grupos-uuid
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Representante'
+    delete:
+      summary: ''
+      operationId: delete-usuarios-login-empresas-grupos-uuid-representantes
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Representante'
+    get:
+      summary: Recuperar representantes
+      operationId: get-usuarios-login-empresas-grupos-uuid-representantes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseRepresentante'
+  '/usuarios/{login}/empresas/grupos/{uuid}/filiais':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    put:
+      summary: Adicionar filiais
+      operationId: put-usuarios-login-empresas-grupos-uuid
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CNPJ'
+    delete:
+      summary: Remover filiais
+      operationId: delete-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CNPJ'
+    get:
+      summary: Recuperar filiais
+      operationId: get-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmpresaSimples'
+  '/usuarios/{login}/empresas/grupos/{uuid}/coligadas':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    put:
+      summary: Adicionar coligadas
+      operationId: put-usuarios-login-empresas-grupos-uuid
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CNPJ'
+    delete:
+      summary: Remover coligadas
+      operationId: delete-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CNPJ'
+    get:
+      summary: Recuperar coligadas
+      operationId: get-usuarios-login-empresas-grupos-uuid-coligadas
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmpresaSimples'
+  '/usuarios/{login}/empresas/grupos/{uuid}/coligadas/pendentes':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    get:
+      summary: Recuperar solicitações de vínculo como coligadas pendentes
+      operationId: get-usuarios-login-empresas-grupos-uuid-coligadas
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmpresaSimples'
+  '/usuarios/{login}/empresas/grupos/{uuid}/coligadas/{cnpj}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: cnpj
+        in: path
+        required: true
+    put:
+      summary: Aprovar solicitação de vínculo como coligada
+      operationId: put-usuarios-login-empresas-grupos-uuid-coligadas-pendentes---copy
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Negar solicitação de vínculo como coligada
+      operationId: delete-usuarios-login-empresas-grupos-uuid-coligadas-cnpj
+      responses:
+        '200':
+          description: OK
+  '/usuarios/{login}/entes-publicos':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como ente
+      operationId: ''
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroEntePublico'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/entes-publicos/grupos':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Cadastrar grupo de entes públicos
+      operationId: ''
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+              required:
+                - nome
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    get:
+      summary: Listar grupos de entes públicos
+      operationId: get-usuarios-login-entes-publicos-grupos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GrupoEntesPublicos'
+  '/usuarios/{login}/entes-publicos/grupos/{uuid}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    get:
+      summary: Recuperar grupo de entes públicos
+      operationId: get-usuarios-login-entes-publicos-grupos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GrupoEntesPublicos'
+    put:
+      summary: Renomear grupo de entes públicos
+      operationId: put-usuarios-login-entes-publicos-grupos-uuid
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+  '/usuarios/{login}/empresas/grupos/{uuid}/entes-vinculados':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    put:
+      summary: Adicionar entes vinculados
+      operationId: put-usuarios-login-empresas-grupos-uuid
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CNPJ'
+    delete:
+      summary: Remover entes vinculados
+      operationId: delete-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CNPJ'
+    get:
+      summary: Recuperar entes vinculados
+      operationId: get-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntePublicoSimples'
+      description: ''
+  '/usuarios/{login}/entes-publicos/autoridades':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Cadastrar autoridade pública
+      operationId: ''
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoridadePublica'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    get:
+      summary: Listar autoridades públicas
+      operationId: get-usuarios-login-entes-publicos-grupos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AutoridadePublica'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/entes-publicos/autoridades/{autoridade-a-uuid}/{autoridade-b-uuid}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: autoridade-a-uuid
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: autoridade-b-uuid
+        in: path
+        required: true
+    put:
+      summary: Unificar autoridades públicas
+      operationId: put-usuarios-login-entes-publicos-autoridades-uuid
+      responses:
+        '200':
+          description: OK
+      description: 'Unifica o cadastro da autoridade identificada por: autoridade-b-uuid no cadastro da autoridade-a-uuid'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/entes-publicos/autoridades/{uuid}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    get:
+      summary: Listar autoridades públicas
+      operationId: get-usuarios-login-entes-publicos-grupos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutoridadePublica'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    put:
+      summary: Atualizar autoridade pública
+      operationId: put-usuarios-login-entes-publicos-autoridades-uuid
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoridadePublica'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/tipos-cadastros':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    get:
+      summary: Listar tipos de cadastro
+      operationId: ''
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  tipo:
+                    type: string
+                  link:
+                    type: string
+                required:
+                  - tipo
+                  - link
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/procuradorias':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como procuradoria
+      operationId: post-usuarios-usuarioId-empresa-privada
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroProcuradoria'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/procuradorias/procuradores':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Vincular procurador à procuradoria
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CPF'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BancaDeAdvogados'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      description: ''
+    get:
+      summary: Pesquisar procuradores vinculados
+      operationId: get-usuarios-login-bancas-de-advogados-advogados
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PessoaFisica'
+  '/usuarios/{login}/procuradorias/procuradores/{cpf}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: cpf
+        in: path
+        required: true
+    put:
+      summary: Aprovar vinculo de procurador
+      operationId: put-usuarios-login-empresas-grupos-uuid
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Reprovar/remover vinculo de procurador
+      operationId: delete-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+    get:
+      summary: Recuperar procurador vinculado
+      operationId: get-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Advogado'
+        '':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PessoaFisica'
+      description: ''
+  '/usuarios/{login}/promotorias':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como promotoria
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroPromotoria'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/promotorias/promotores':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Vincular promotor à promotoria
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CPF'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BancaDeAdvogados'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      description: ''
+    get:
+      summary: Pesquisar promotores vinculados
+      operationId: get-usuarios-login-bancas-de-advogados-advogados
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PessoaFisica'
+  '/usuarios/{login}/promotorias/promotores/{cpf}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: cpf
+        in: path
+        required: true
+    put:
+      summary: Aprovar vinculo de promotor
+      operationId: put-usuarios-login-empresas-grupos-uuid
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Reprovar/remover vinculo de promotor
+      operationId: delete-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+    get:
+      summary: Recuperar promotor vinculado
+      operationId: get-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Advogado'
+        '':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PessoaFisica'
+      description: ''
+  '/usuarios/{login}/defensorias-publicas':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como defensoria pública
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroDefensoriaPublica'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/bancas-de-advogados':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como banca de advogados
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroBancaDeAdvogados'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BancaDeAdvogados'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/bancas-de-advogados/advogados':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Vincular advogado à banca
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IdentificacaoAdvogado'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BancaDeAdvogados'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    get:
+      summary: Pesquisar advogados vinculados
+      operationId: get-usuarios-login-bancas-de-advogados-advogados
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Advogado'
+  '/usuarios/{login}/bancas-de-advogados/advogados/{oab}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: oab
+        in: path
+        required: true
+    put:
+      summary: Aprovar vinculo de advogado
+      operationId: put-usuarios-login-empresas-grupos-uuid
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Reprovar/remover vinculo de advogado
+      operationId: delete-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+    get:
+      summary: Recuperar advogado vinculado
+      operationId: get-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Advogado'
+        '':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Advogado'
+      description: ''
+  '/usuarios/{login}/bancas-de-advogados/assistentes':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Vincular assistente à banca
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IdentificacaoAdvogado'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BancaDeAdvogados'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      description: Pode-se vincular um assistente sem OAB ou um estagiário de direito que possua uma OAB
+    get:
+      summary: Pesquisar assistentes vinculados
+      operationId: get-usuarios-login-bancas-de-advogados-advogados
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Advogado'
+  '/usuarios/{login}/bancas-de-advogados/assistentes/{cpf}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: cpf
+        in: path
+        required: true
+    put:
+      summary: Aprovar vinculo de assistente
+      operationId: put-usuarios-login-empresas-grupos-uuid
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Reprovar/remover vinculo de assistente
+      operationId: delete-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+    get:
+      summary: Recuperar assistente vinculado
+      operationId: get-usuarios-login-empresas-grupos-uuid-filiais
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Advogado'
+        '':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PessoaFisica'
+      description: ''
+  '/usuarios/{login}/cidadoes':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como cidadão
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroCidadao'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/advogados':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como advogado
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroAdvogado'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/procuradores':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como advogado
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroProcurador'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/defensores':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como defensor
+      operationId: post-usuarios-usuarioId-empresa-privada
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroDefensorPublico'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/promotores':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    post:
+      summary: Realizar cadastro como promotores
+      operationId: post-usuarios-usuarioId-promotores
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroPromotor'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  '/usuarios/{login}/termos-compromissos':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    get:
+      summary: Pesquisar termos de compromisso do usuário
+      operationId: get-usuarios-login-entes-publicos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseTermoCompromisso'
+        '':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTermoCompromisso'
+  '/termos-compromissos/{uuid}':
+    parameters:
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+    get:
+      summary: Recuperar termo de compromisso
+      operationId: 'get-usuarios-login-termos-compromissos:assinar'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTermoCompromisso'
+        '':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTermoCompromisso'
+    put:
+      summary: Assinar termo de compromisso
+      operationId: put-termos-compromissos-uuid
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Assinatura'
+        description: ''
+  /colaboradores:
+    get:
+      summary: Recuperar colaboradores
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Colaborador'
+        '400':
+          description: Nenhum colaborador encontrado
+      operationId: get-colaboradores
+      description: Recupera colaboradores
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer ...
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: cnpj
+          description: CNPJ da empresa
+        - schema:
+            type: string
+          in: query
+          name: cpf
+          description: CPF da pessoa
+        - schema:
+            type: string
+          in: query
+          name: perfil
+          description: 'Lista de perfis separados por :'
+    post:
+      summary: Cadastrar colaborador
+      operationId: post-colaboradores
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: Cadastra colaborador
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer ...
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Colaborador'
+  '/colaboradores/{login}':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    get:
+      summary: Recuperar colaborador
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Colaborador'
+      operationId: get-colaboradores-login
+    put:
+      summary: Alterar colaborador
+      operationId: put-colaboradores-login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Colaborador'
+      description: Altera colaborador
+  '/colaboradores/{login}/permissoes':
+    get:
+      summary: Recuperar permissões do colaborador
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Permissao'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      operationId: get-colaboradores-permissoes
+      description: Recupera permissões do colaborador
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer ...
+          required: true
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+        description: Login do colaborador
+    post:
+      summary: Cadastrar permissão do colaborador
+      operationId: post-colaboradores-id-permissoes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  perfis:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: Cadastro permissão do colaborador
+      parameters:
+        - schema:
+            type: string
+          in: query
+          description: Bearer ...
+          name: Authorization
+          required: true
+    put:
+      summary: Alterar permissões do colaborador
+      operationId: put-colaboradores-id-permissoes
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer ...
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                perfis:
+                  type: array
+                  items:
+                    type: string
+  /representantes:
+    get:
+      summary: Recupera respresentantes
+      tags: []
+      responses: {}
+      operationId: get-representantes
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer ...
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Representante'
+    post:
+      summary: Cadastrar representante
+      operationId: post-representantes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Representante'
+      description: Cadastra representante
+  '/representantes/{login}':
+    get:
+      summary: Recuperar representantes
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Representante'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      operationId: get-representantes
+      description: Recupera representantes
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer ...
+          required: true
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+        description: Login do representante
+    put:
+      summary: Alterar representante (aprova / reprova vínculo)
+      operationId: put-representantes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Representante'
+      description: Altera representante (aprova / reprova vínculo)
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Autorization
+          description: Bearer ...
+          required: true
+  '/representantes/{login}/permissoes':
+    parameters:
+      - schema:
+          type: string
+        name: login
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-representantes-login-permissoes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Response'
+    post:
+      summary: Cadastro permissão do representante
+      operationId: post-representantes-login-permissoes
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permissao'
+    put:
+      summary: Altera permissões do colaborador
+      operationId: put-representantes-login-permissoes
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                perfir:
+                  type: array
+                  items:
+                    type: string
+  /usuarios/contatos:
+    get:
+      summary: Recuperar contatos
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      operationId: get-usuarios-contatos
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: login
+          description: Identificador do usuário
+      description: Recupera contatos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type:
+                      - string
+                      - number
+                  contato:
+                    $ref: '#/components/schemas/Contato'
+    post:
+      summary: Criar contato
+      operationId: post-usuarios-contatos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  contato:
+                    $ref: '#/components/schemas/Contato'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: Cria contato
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contato'
+    put:
+      summary: Atualizar contato
+      operationId: put-usuarios-contatos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  contato:
+                    $ref: '#/components/schemas/Contato'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: Atualiza contato
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                contato:
+                  $ref: '#/components/schemas/Contato'
+    parameters: []
+  '/usuarios/emails:validar':
+    put:
+      summary: Validar email
+      operationId: 'put-usuarios-emails:validar'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                codigoValidacao:
+                  type: string
+              required:
+                - email
+                - codigoValidacao
+      description: Valida email
+    parameters: []
+  '/usuarios/telefones:validar':
+    put:
+      summary: Validar telefone
+      operationId: 'put-usuarios-telefone:validar'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: Valida telefone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                telefone:
+                  type: string
+                codigoValidacao:
+                  type: string
+              required:
+                - telefone
+                - codigoValidacao
+    parameters: []
+  '/usuarios/oab:confirmar':
+    parameters: []
+    put:
+      summary: Confirmar OAB
+      operationId: 'put-usuarios-oab:confirmar'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: Confirmar OAB. Operação executada pelo detentor da OAB. (Advogado / Defensor Público)
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oab:
+                  type: string
+                codigoConfirmacao:
+                  type: string
+              required:
+                - oab
+                - codigoConfirmacao
+  '/defensorias/{id}/vinculos':
+    get:
+      summary: Recupera vínculo
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VinculoDefensoria'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      operationId: get-defensorias-vinculos
+      description: Recupera vínculo
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+    post:
+      summary: Solicita vínculo
+      operationId: post-defensorias-vinculos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VinculoDefensoria'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      description: Solicita vínculo
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroVinculoDefensoria'
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identificador da defensoria
+  '/defensorias/{id}/vinculos/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identificador da defensoria
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identificador do vínculo
+    delete:
+      summary: Exclui solicitação de vínculo
+      operationId: delete-defensorias-id-vinculos-id
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+  '/promotorias/{id}/vinculos':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identificador da promotoria
+    get:
+      summary: Recupera vínculo
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VinculoPromotoria'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      operationId: get-promotorias-id-vinculos
+      description: Recupera vínculo
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+    post:
+      summary: Solicita vínculo
+      operationId: post-promotorias-vinculos
+      responses:
+        '200':
+          description: OK
+      description: Solicita vínculo
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroVinculoPromotoria'
+  '/promotorias/{id}/vinculos/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identificador da promotoria
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identificador do vínculo
+    delete:
+      summary: Exclui solicitação de vínculo
+      operationId: delete-defensorias-id-vinculos-id
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+  '/procuradorias/{id}/vinculos':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identificador da procuradoria
+    get:
+      summary: Recupera vínculo
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VinculoProcuradoria'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      operationId: get-promotorias-id-vinculos
+      description: Recupera vínculo
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+    post:
+      summary: Solicita vínculo
+      operationId: post-promotorias-vinculos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VinculoProcuradoria'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: Solicita vínculo
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroVinculoProcuradoria'
+  '/procuradorias/{id}/vinculos/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identificador da procuradoria
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identificador do vínculo
+    delete:
+      summary: Exclui solicitação de vínculo
+      operationId: delete-procuradorias-vinculos
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer [JWT]'
+          required: true
+      description: Exclui solicitação de vínculo
+components:
+  schemas:
+    Response:
+      title: Response
+      type: object
+      properties:
+        code:
+          type: integer
+        messages:
+          type: array
+          items:
+            type: string
+        result:
+          type: object
+        status:
+          type: string
+      description: Response padrão da PDPJ
+    RegistroEmpresa:
+      title: Empresa privada
+      type: object
+      properties:
+        nome-fantasia:
+          type: string
+        razao-social:
+          type: string
+        CNPJ:
+          type: string
+        data-abertura:
+          type: string
+        atividade-economica-principal:
+          type: string
+        natureza-juridica:
+          type: string
+        responsavel:
+          type: object
+          properties:
+            nome:
+              type: string
+            cpf:
+              type: string
+        registro-junta-comrecial:
+          type:
+            - string
+            - object
+          properties:
+            uf:
+              type: string
+            numero:
+              type: string
+        contato:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeioContato'
+        enderecos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endereco'
+      required:
+        - nome-fantasia
+        - razao-social
+        - CNPJ
+        - data-abertura
+        - atividade-economica-principal
+        - natureza-juridica
+    RegistroEntePublico:
+      title: Ente público
+      type: object
+      properties:
+        nome-fantasia:
+          type: string
+        razao-social:
+          type: string
+        CNPJ:
+          type: string
+        ente-federativo-responsavel:
+          type: string
+        natureza-juridica:
+          type: string
+        atividade-economica-principal:
+          type: string
+        data-abertura:
+          type: string
+        contato:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeioContato'
+        enderecos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endereco'
+        UF:
+          type: string
+      required:
+        - nome-fantasia
+        - razao-social
+        - CNPJ
+        - ente-federativo-responsavel
+        - natureza-juridica
+        - atividade-economica-principal
+        - data-abertura
+        - UF
+    RegistroProcuradoria:
+      title: Procuradoria
+      type: object
+      properties:
+        nome-fantasia:
+          type: string
+        razao-social:
+          type: string
+        CNPJ:
+          type: string
+        natureza-juridica:
+          type: string
+        atividade-economica-principal:
+          type: string
+        data-abertura:
+          type: string
+        contato:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeioContato'
+        enderecos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endereco'
+        procurador-geral:
+          type: object
+          required:
+            - cpf
+          properties:
+            nome:
+              type: string
+            cpf:
+              type: string
+        UF:
+          type: string
+      required:
+        - nome-fantasia
+        - razao-social
+        - CNPJ
+        - natureza-juridica
+        - atividade-economica-principal
+        - data-abertura
+        - procurador-geral
+        - UF
+    RegistroPromotoria:
+      title: Procuradoria
+      type: object
+      properties:
+        nome-fantasia:
+          type: string
+        razao-social:
+          type: string
+        CNPJ:
+          type: string
+        natureza-juridica:
+          type: string
+        atividade-economica-principal:
+          type: string
+        data-abertura:
+          type: string
+        contato:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeioContato'
+        enderecos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endereco'
+        promotor-geral:
+          type: object
+          required:
+            - cpf
+          properties:
+            nome:
+              type: string
+            cpf:
+              type: string
+        UF:
+          type: string
+      required:
+        - nome-fantasia
+        - razao-social
+        - CNPJ
+        - natureza-juridica
+        - atividade-economica-principal
+        - data-abertura
+        - promotor-geral
+        - UF
+    RegistroDefensoriaPublica:
+      title: Defensoria pública
+      type: object
+      properties:
+        nome-fantasia:
+          type: string
+        razao-social:
+          type: string
+        CNPJ:
+          type: string
+        natureza-juridica:
+          type: string
+        atividade-economica-principal:
+          type: string
+        data-abertura:
+          type: string
+        contato:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeioContato'
+        enderecos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endereco'
+        defensor-publico-geral:
+          type: object
+          required:
+            - cpf
+          properties:
+            nome:
+              type: string
+            cpf:
+              type: string
+        UF:
+          type: string
+      required:
+        - nome-fantasia
+        - razao-social
+        - CNPJ
+        - natureza-juridica
+        - atividade-economica-principal
+        - data-abertura
+        - defensor-publico-geral
+        - UF
+    RegistroBancaDeAdvogados:
+      title: Banca de advogados
+      type: object
+      description: ''
+      properties:
+        nome-fantasia:
+          type: string
+        razao-social:
+          type: string
+        CNPJ:
+          type: string
+        OAB:
+          type: string
+        natureza-juridica:
+          type: string
+        atividade-economica-principal:
+          type: string
+        data-abertura:
+          type: string
+        contato:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeioContato'
+        enderecos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endereco'
+        areas-direito:
+          type: array
+          items:
+            type: object
+            properties:
+              codigo-sgt:
+                type: string
+              nome:
+                type: string
+            required:
+              - codigo-sgt
+        socios:
+          type: array
+          items:
+            $ref: '#/components/schemas/PessoaFisica'
+      required:
+        - nome-fantasia
+        - razao-social
+        - CNPJ
+        - OAB
+        - natureza-juridica
+        - atividade-economica-principal
+        - data-abertura
+        - areas-direito
+    Endereco:
+      title: Endereco
+      type: object
+      properties:
+        cep:
+          type: string
+        estado:
+          type: string
+        cidade:
+          type: string
+        bairro:
+          type: string
+        logradouro:
+          type: string
+        numero:
+          type: string
+        complemento:
+          type: string
+        pais:
+          type: string
+        '':
+          type: string
+    MeioContato:
+      title: Contato
+      type: object
+      properties:
+        numero:
+          type: string
+        tipo:
+          type: string
+    RegistroCidadao:
+      title: Cidadao
+      type: object
+      properties:
+        nome:
+          type: string
+        nome-social:
+          type: string
+        CPF:
+          type: string
+        passaporte:
+          type: string
+        sexo:
+          type: string
+        data-nascimento:
+          type: string
+        data-obito:
+          type: string
+        municipio-nascimento:
+          type: string
+        pais-nascimento:
+          type: string
+    RegistroAdvogado:
+      title: Advogado
+      type: object
+      properties:
+        oab:
+          type: string
+        escritorio:
+          type: array
+          items:
+            type: object
+            properties:
+              oab:
+                type: string
+      required:
+        - oab
+    RegistroProcurador:
+      title: Procurador
+      type: object
+      description: ''
+      properties:
+        matricula:
+          type: string
+        procuradoria:
+          type: object
+          required:
+            - cnpj
+          properties:
+            cnpj:
+              type: string
+      required:
+        - matricula
+        - procuradoria
+    RegistroPromotor:
+      title: Promotor
+      type: object
+      description: ''
+      properties:
+        matricula:
+          type: string
+        promotoria:
+          type: object
+          required:
+            - cnpj
+          properties:
+            cnpj:
+              type: string
+      required:
+        - matricula
+        - promotoria
+    RegistroDefensorPublico:
+      title: Defensor publico
+      type: object
+      description: ''
+      properties:
+        matricula:
+          type: string
+        defensoria-publica:
+          type: object
+          required:
+            - cnpj
+          properties:
+            cnpj:
+              type: string
+      required:
+        - matricula
+        - defensoria-publica
+    PessoaFisica:
+      title: Pessoa Fisica
+      type: object
+      properties:
+        nome:
+          type: string
+        cpf:
+          type: string
+    Colaborador:
+      title: Colaborador
+      type: object
+      properties:
+        pessoaFisica:
+          $ref: '#/components/schemas/PessoaFisica'
+        ativo:
+          type: boolean
+        perfis:
+          type: array
+          items:
+            type: string
+        'link to /colaboradores/{login}/permissoes':
+          type: string
+        aprovacaoPendente:
+          type: boolean
+        cadastroPendente:
+          type: boolean
+    Permissao:
+      type: object
+      properties:
+        acao:
+          type: string
+    Representante:
+      title: Representante
+      type: object
+      properties:
+        oab:
+          type: string
+        cnpj:
+          type: string
+      required:
+        - oab
+        - cnpj
+    Contato:
+      title: Contato
+      type: object
+      properties:
+        tipo:
+          type: string
+          enum:
+            - email
+            - telefone
+        valor:
+          type: string
+    ResponseTermoCompromisso:
+      title: ResponseTermoCompromisso
+      type: object
+      properties:
+        uuid:
+          type: string
+        conteudo:
+          type: string
+        assinatura:
+          $ref: '#/components/schemas/Assinatura'
+        cadastro:
+          oneOf:
+            - properties: {}
+              enum:
+                - empresa
+                - procuradoria
+                - promotoria
+                - defensoria-publica
+                - ente-publico
+                - banca-advogados
+                - cidadao
+                - advogado
+                - procurador
+                - promotor
+                - defensor
+          type: string
+    Assinatura:
+      title: Assinatura
+      type: object
+      properties:
+        hash:
+          type: string
+        algoritmoHash:
+          type: string
+        cadeiaCertificado:
+          type: string
+        dataAssinatura:
+          type: string
+        codificacaoCadeiaCertificado:
+          type: string
+    GrupoEmpresa:
+      title: GrupoEmpresa
+      type: object
+      properties:
+        uuid:
+          type: string
+        nome:
+          type: string
+        representantes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Representante'
+        filiais:
+          $ref: '#/components/schemas/EmpresaSimples'
+        coligadas:
+          $ref: '#/components/schemas/EmpresaSimples'
+      required:
+        - nome
+    GrupoEntesPublicos:
+      title: GrupoEntesPublicos
+      type: object
+      properties:
+        uuid:
+          type: string
+        nome:
+          type: string
+        entes-vinculados:
+          $ref: '#/components/schemas/EntePublicoSimples'
+      required:
+        - nome
+    EmpresaSimples:
+      title: EmpresaSimples
+      type: object
+      properties:
+        uuid:
+          type: string
+        cnpj:
+          type: string
+        razao-social:
+          type: string
+        nome-fantasia:
+          type: string
+    EntePublicoSimples:
+      title: EntePublico
+      type: object
+      properties:
+        uuid:
+          type: string
+        cnpj:
+          type: string
+        razao-social:
+          type: string
+        nome-fantasia:
+          type: string
+    CNPJ:
+      title: CNPJ
+      type: object
+      properties:
+        cnpj:
+          type: string
+      required:
+        - cnpj
+    CPF:
+      title: CPF
+      type: object
+      properties:
+        cpf:
+          type: string
+      required:
+        - cpf
+    ResponseRepresentante:
+      title: ResponseRepresentante
+      type: object
+      properties:
+        nome:
+          type: string
+        cnpj:
+          type: string
+        oab:
+          type: string
+        cpf:
+          type: string
+        tipo:
+          type: string
+    AutoridadePublica:
+      title: AutoridadePublica
+      type: object
+      properties:
+        uuid:
+          type: string
+        nome:
+          type: string
+        data-inicio:
+          type: string
+        data-termino:
+          type: string
+        ativo:
+          type: boolean
+      required:
+        - nome
+    RegistroVinculoDefensoria:
+      title: RegistroVinculoDefensoria
+      type: object
+      properties:
+        matricula:
+          type: string
+          description: Matrícula do defensor
+        oab:
+          type: string
+          description: Número da OAB
+      required:
+        - matricula
+        - oab
+    VinculoDefensoria:
+      title: VinculoDefensoria
+      type: object
+      properties:
+        id:
+          type: number
+          description: Identificador do vínculo
+        nomeDefensoria:
+          type: string
+          description: Nome da defensoria
+        estado:
+          type: string
+          enum:
+            - Pendente
+            - Aprovado
+            - Reprovado
+          description: Estado do vínculo
+        matricula:
+          type: string
+          description: Matrícula do defensor
+        oab:
+          type: string
+          description: Número da OAB
+      required:
+        - id
+        - nomeDefensoria
+        - estado
+        - matricula
+        - oab
+    RegistroVinculoPromotoria:
+      title: RegistroVinculoPromotoria
+      type: object
+      properties:
+        matricula:
+          type: string
+          description: Matrícula do promotor
+        oab:
+          type: string
+          description: Número da OAB
+      required:
+        - matricula
+        - oab
+    VinculoPromotoria:
+      title: VinculoPromotoria
+      type: object
+      properties:
+        id:
+          type: number
+          description: Identificador do vínculo
+        nomePromotoria:
+          type: string
+          description: Nome da promotoria
+        estado:
+          type: string
+          enum:
+            - Pendente
+            - Aprovado
+            - Reprovado
+          description: Estado do vínculo
+        matricula:
+          type: string
+          description: Matrícula do promotor
+        oab:
+          type: string
+          description: Número da OAB
+      required:
+        - id
+        - nomePromotoria
+        - estado
+        - matricula
+        - oab
+    RegistroVinculoProcuradoria:
+      title: RegistroVinculoProcuradoria
+      type: object
+      properties:
+        matricula:
+          type: string
+          description: Matrícula do procurador
+        oab:
+          type: string
+          description: Número da OAB
+      required:
+        - matricula
+        - oab
+    VinculoProcuradoria:
+      title: VinculoProcuradoria
+      type: object
+      properties:
+        id:
+          type: number
+          description: Identificador do vínculo
+        nomeProcuradoria:
+          type: string
+          description: Nome da procuradoria
+        estado:
+          type: string
+          enum:
+            - Pendente
+            - Aprovado
+            - Reprovado
+          description: Estado do vínculo
+        matricula:
+          type: string
+          description: Matrícula do procurador
+        oab:
+          type: string
+          description: Número da OAB
+      required:
+        - id
+        - nomeProcuradoria
+        - estado
+        - matricula
+        - oab
+    IdentificacaoAdvogado:
+      title: IdentificacaoAdvogado
+      type: object
+      properties:
+        identificacao:
+          anyOf: []
+        cpf:
+          type: string
+        oab:
+          type: string
+      required:
+        - identificacao
+    Advogado:
+      title: Advogado
+      type: object
+      properties:
+        nome:
+          type: string
+        identificador:
+          $ref: '#/components/schemas/IdentificacaoAdvogado'
+      required:
+        - nome
+        - identificador
+  responses: {}
+  securitySchemes:
+    Authorization:
+      type: oauth2
+      description: ''
+security:
+  - Authorization: []
